@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+
   def index
+
 
   end
 
@@ -8,6 +10,14 @@ class UsersController < ApplicationController
   end
 
   def login
+
+  end
+
+  def editable_user
+
+  end
+
+  def destroy
 
   end
 
@@ -67,9 +77,9 @@ class UsersController < ApplicationController
   end
 
   def calculate_total
-    minutes = @user.tab.total_minutes + ((@user.tab.finish_date - @user.tab.start_date) / 1.minutes)
-    cost = minutes * 2 #beer prize 2 euros per minute
-    @user.tab.update(total_minutes: minutes,total_euros: cost )
+    seconds = @user.tab.total_seconds + ((@user.tab.finish_date - @user.tab.start_date) / 1.seconds)
+    cost = (seconds * @user.tab.beer_type.flow_volume) * @user.tab.beer_type.prize_per_litre
+    @user.tab.update(total_seconds: seconds,total_euros: cost )
   end
 
   def set_stop

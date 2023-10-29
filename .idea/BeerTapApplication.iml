@@ -50,6 +50,7 @@
     <orderEntry type="library" scope="PROVIDED" name="byebug (v11.1.3, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.35.3, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="childprocess (v4.1.0, RVM: ruby-2.5.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="climate_control (v0.2.0, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.2.2, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="digest (v3.1.1, RVM: ruby-2.5.3) [gem]" level="application" />
@@ -67,6 +68,9 @@
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.8.1, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.2, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="method_source (v1.0.0, RVM: ruby-2.5.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.5.1, RVM: ruby-2.5.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2023.1003, RVM: ruby-2.5.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mimemagic (v0.3.10, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.2, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.15.0, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.7.2, RVM: ruby-2.5.3) [gem]" level="application" />
@@ -77,6 +81,7 @@
     <orderEntry type="library" scope="PROVIDED" name="net-smtp (v0.3.0, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nio4r (v2.5.9, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.12.5, RVM: ruby-2.5.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="paperclip (v6.1.0, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="popper_js (v2.11.8, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v4.0.7, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v5.6.7, RVM: ruby-2.5.3) [gem]" level="application" />
@@ -107,6 +112,7 @@
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.4.2, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="strscan (v3.0.7, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="temple (v0.10.3, RVM: ruby-2.5.3) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="terrapin (v0.6.0, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.2.2, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.3.0, RVM: ruby-2.5.3) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timeout (v0.4.0, RVM: ruby-2.5.3) [gem]" level="application" />
@@ -146,6 +152,7 @@
         <option value="mailer" />
         <option value="migration" />
         <option value="model" />
+        <option value="paperclip" />
         <option value="rack_profiler:install" />
         <option value="resource" />
         <option value="scaffold" />
@@ -179,6 +186,7 @@
         <option value="mailer" />
         <option value="migration" />
         <option value="model" />
+        <option value="paperclip" />
         <option value="rack_profiler:install" />
         <option value="resource" />
         <option value="scaffold" />
@@ -379,6 +387,21 @@
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Prints out your Rack middleware stack" fullCommand="middleware" id="middleware" />
+          <RakeTaskImpl id="paperclip">
+            <subtasks>
+              <RakeTaskImpl description="Cleans out invalid attachments" fullCommand="paperclip:clean" id="clean" />
+              <RakeTaskImpl description="find missing attachments" fullCommand="paperclip:find_broken_attachments" id="find_broken_attachments" />
+              <RakeTaskImpl description="Refreshes both metadata and thumbnails" fullCommand="paperclip:refresh" id="refresh" />
+              <RakeTaskImpl id="refresh">
+                <subtasks>
+                  <RakeTaskImpl description="Regenerates fingerprints for a given CLASS (and optional ATTACHMENT). Useful when changing digest" fullCommand="paperclip:refresh:fingerprints" id="fingerprints" />
+                  <RakeTaskImpl description="Regenerates content_type/size metadata for a given CLASS (and optional ATTACHMENT)" fullCommand="paperclip:refresh:metadata" id="metadata" />
+                  <RakeTaskImpl description="Regenerates missing thumbnail styles for all classes using Paperclip" fullCommand="paperclip:refresh:missing_styles" id="missing_styles" />
+                  <RakeTaskImpl description="Regenerates thumbnails for a given CLASS (and optional ATTACHMENT and STYLES splitted by comma)" fullCommand="paperclip:refresh:thumbnails" id="thumbnails" />
+                </subtasks>
+              </RakeTaskImpl>
+            </subtasks>
+          </RakeTaskImpl>
           <RakeTaskImpl description="Restart app by touching tmp/restart.txt" fullCommand="restart" id="restart" />
           <RakeTaskImpl description="Generate a cryptographically secure secret key (this is typically used to generate a secret for cookie sessions)" fullCommand="secret" id="secret" />
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />

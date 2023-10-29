@@ -4,7 +4,7 @@ row
       .div  class="form-outline mb-4"
         p
           h2 = 'Tab information for user '+ @user.name
-          h5 = 'Total minutes: '+ (!@user.tab.try(:total_minutes).nil? ? @user.tab.try(:total_minutes).round(2).to_s : '0')
+          h5 = 'Total seconds: '+ (!@user.tab.try(:total_seconds).nil? ? @user.tab.try(:total_seconds).round(2).to_s : '0')
           h5 = 'Total euros: '+ (!@user.tab.try(:total_euros).nil? ? @user.tab.try(:total_euros).round(2).to_s : '0')+' €'
       - if @stop == 'false'
         .div  class="form-outline mb-4"
