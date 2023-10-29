@@ -4,23 +4,10 @@ html class="text-center pt-1 mb-5 pb-1"
   body
     .div  class="form-outline mb-4"
       h1 = 'Beer Tap Counter'
-    row
-      col
-        div
-          .div  class="form-outline mb-4"
-            p
-              h2 = 'Tab Information for user '+ @user.name
-              h5 = 'Total minutes: '+ (!@user.tab.try(:total_minutes).nil? ? @user.tab.try(:total_minutes).round(2).to_s : '0')
-              h5 = 'Total euros: '+ (!@user.tab.try(:total_euros).nil? ? @user.tab.try(:total_euros).round(2).to_s : '0')+' €'
-          - if @stop == 'false'
-            .div  class="form-outline mb-4"
-              = link_to 'Start', save_start_date_path(user_id:@user.id), class:"btn btn-success"
-            .div class="form-outline mb-4"
-              = link_to 'Log Out', login_users_path, class: 'btn btn-primary'
-            .div class="form-outline mb-4"
-              = link_to 'Reset', reset_path, class: 'btn btn-warning'
-          - else
-            .div  class="form-outline mb-4"
-              = link_to 'Stop', save_finish_date_path(user_id:@user.id), class:"btn btn-danger"
+    - if @user.role_cd == User.roles[:client]
+      = render partial: "client_view"
+    - elsif @user.role_cd == User.roles[:admin]
+      = render partial: "admin_view"
+
 
 

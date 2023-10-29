@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    tab = Tab.create()
+    tab = Tab.create(beer_type_id:params[:users][:beer_type_id])
     user = User.create(tab_id:tab.try(:id),name: params[:users][:name], password: params[:users][:password], password_confirmation: params[:users][:password_confirmation])
     if user.save
       render :login

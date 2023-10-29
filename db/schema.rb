@@ -10,25 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_29_083246) do
+ActiveRecord::Schema.define(version: 2023_10_29_190958) do
+
+  create_table "beer_types", charset: "latin1", force: :cascade do |t|
+    t.string "name"
+    t.float "prize_per_litre"
+    t.float "flow_volume", default: 0.0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "tabs", charset: "latin1", force: :cascade do |t|
-    t.float "total_minutes", default: 0.0
+    t.float "total_seconds", default: 0.0
     t.datetime "start_date"
     t.datetime "finish_date"
     t.float "total_euros", default: 0.0
+    t.bigint "beer_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["beer_type_id"], name: "fk_rails_cb104236d5"
   end
 
   create_table "users", charset: "latin1", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
     t.bigint "tab_id"
+    t.integer "role_cd", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tab_id"], name: "index_users_on_tab_id"
   end
 
+  add_foreign_key "tabs", "beer_types"
   add_foreign_key "users", "tabs"
 end
