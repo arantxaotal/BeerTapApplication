@@ -4,17 +4,22 @@ html class="text-center pt-1 mb-5 pb-1"
   body
     .div  class="form-outline mb-4"
       h1 = 'Beer Tap Counter'
+      i class=""
     row
       col
         div
           .div  class="form-outline mb-4"
             p
               h2 = 'Tab Information for user '+ @user.name
-              h5 = 'Total minutes: '+ (!@user.tab.try(:total_minutes).nil? ? @user.tab.try(:total_minutes) : '0')
-              h5 = 'Total euros: '+ (!@user.tab.try(:total_euros).nil? ? @user.tab.try(:total_euros) : '0')
+              h5 = 'Total minutes: '+ (!@user.tab.try(:total_minutes).nil? ? @user.tab.try(:total_minutes).round(2).to_s : '0')
+              h5 = 'Total euros: '+ (!@user.tab.try(:total_euros).nil? ? @user.tab.try(:total_euros).round(2).to_s : '0')
+          - if !@stop
+            .div  class="form-outline mb-4"
+              = link_to 'Start', save_start_date_path(user_id:@user.id), class:"btn btn-success"
+            .div class="form-outline mb-4"
+              = link_to 'Log Out', login_users_path, class: 'btn btn-primary'
+          - else
+            .div  class="form-outline mb-4"
+              = link_to 'Stop', save_finish_date_path(user_id:@user.id), class:"btn btn-danger"
 
-          .div  class="form-outline mb-4"
-            button type="button" class="btn btn-success" = 'Start'
-          .div  class="form-outline mb-4"
-            button type="button" class="btn btn-danger" = 'Stop'
 

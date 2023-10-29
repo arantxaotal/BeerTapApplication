@@ -1,10 +1,10 @@
 class CreateTabs < ActiveRecord::Migration[6.1]
   def change
     create_table :tabs do |t|
-      t.integer "total_minutes"
+      t.float "total_minutes", default: 0
       t.datetime "start_date"
       t.datetime "finish_date"
-      t.integer "total_euros"
+      t.float "total_euros", default: 0
       t.timestamps
     end
   end

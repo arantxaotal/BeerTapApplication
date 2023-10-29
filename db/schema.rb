@@ -13,10 +13,10 @@
 ActiveRecord::Schema.define(version: 2023_10_29_083246) do
 
   create_table "tabs", charset: "latin1", force: :cascade do |t|
-    t.integer "total_minutes"
+    t.float "total_minutes", default: 0.0
     t.datetime "start_date"
     t.datetime "finish_date"
-    t.integer "total_euros"
+    t.float "total_euros", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
