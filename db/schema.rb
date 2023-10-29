@@ -24,10 +24,11 @@ ActiveRecord::Schema.define(version: 2023_10_29_083246) do
   create_table "users", charset: "latin1", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
-    t.bigint "tabs_id"
+    t.bigint "tab_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["tabs_id"], name: "index_users_on_tabs_id"
+    t.index ["tab_id"], name: "index_users_on_tab_id"
   end
 
+  add_foreign_key "users", "tabs"
 end

@@ -1,0 +1,20 @@
+html class="text-center pt-1 mb-5 pb-1"
+  head
+    title = 'Beer Tap Counter'
+  body
+    .div  class="form-outline mb-4"
+      h1 = 'Beer Tap Counter'
+    row
+      col
+        div
+          .div  class="form-outline mb-4"
+            p
+              h2 = 'Tab Information for user '+ @user.name
+              h5 = 'Total minutes: '+ (!@user.tab.try(:total_minutes).nil? ? @user.tab.try(:total_minutes) : '0')
+              h5 = 'Total euros: '+ (!@user.tab.try(:total_euros).nil? ? @user.tab.try(:total_euros) : '0')
+
+          .div  class="form-outline mb-4"
+            button type="button" class="btn btn-success" = 'Start'
+          .div  class="form-outline mb-4"
+            button type="button" class="btn btn-danger" = 'Stop'
+

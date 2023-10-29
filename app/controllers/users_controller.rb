@@ -27,6 +27,8 @@ class UsersController < ApplicationController
   def new
     user = User.new(name: params[:users][:name], password: params[:users][:password], password_confirmation: params[:users][:password_confirmation])
     if user.save
+      tab = Tab.create
+      user.update(tab_id:tab.try(:id))
       render :login
     else
       render :register
