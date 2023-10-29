@@ -1,0 +1,14 @@
+html class="text-center pt-1 mb-5 pb-1"
+  head
+    title = 'Beer Tap Counter'
+  body
+    h1 = 'Beer Tap Counter'
+    row
+      col
+        p = 'This is an app for calculate your beer consumption'
+    div
+      = link_to 'Log In', login_users_path, class: 'btn btn-primary'
+
+    div = link_to 'Register', register_users_path
+
+

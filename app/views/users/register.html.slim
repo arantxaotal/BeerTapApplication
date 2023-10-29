@@ -1,0 +1,21 @@
+html class="text-center pt-1 mb-5 pb-1"
+  head
+    title = 'Beer Tap Counter'
+  body
+    .div  class="form-outline mb-4"
+      h1 = 'Beer Tap Counter'
+    row
+      col
+        h5 = 'Please register your user information'
+        div = form_for :users, url: new_user_path, method:'GET', html: { multipart: true }, authenticity_token: true, remote: true do |f|
+
+            .div  class="form-outline mb-4"
+              - title = 'Username'
+              = f.text_field :name,  placeholder: title, title: title, required: true
+
+            .div  class="form-outline mb-4"
+              - title = 'Password'
+              = f.password_field :password_digest, placeholder: title, title: title, required: true
+
+            .div  class="form-outline mb-4"
+              = f.submit 'Enter', class: 'btn btn-primary'
