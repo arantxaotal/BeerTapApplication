@@ -15,7 +15,10 @@ html class="text-center pt-1 mb-5 pb-1"
 
             .div  class="form-outline mb-4"
               - title = 'Password'
-              = f.password_field :password_digest, placeholder: title, title: title, required: true
+              = f.password_field :password, placeholder: title, title: title, required: true
 
+            .div class="form-outline mb-4"
+              - title = 'Password confirmation'
+              = f.password_field :password_confirmation, placeholder: title, title: title, required: true
             .div  class="form-outline mb-4"
               = f.submit 'Enter', class: 'btn btn-primary'
