@@ -14,27 +14,33 @@ class UsersController < ApplicationController
   def save_start_date
     set_user
     @user.tab.update_attribute(:start_date, DateTime.now)
-    @stop = true
-    render :tab_beer_show
+
+    redirect_to tab_beer_show_path(user_id:@user.id,stop:'true')
   end
 
   def save_finish_date
     set_user
     @user.tab.update_attribute(:finish_date, DateTime.now)
     calculate_total
-    @stop = false
-    render :tab_beer_show
+    redirect_to tab_beer_show_path(user_id:@user.id,stop:'false')
+  end
+  def reset
+    set_user
+    @user.tab.update(finish_date: nil,finish_date:nil,total_euros:0,total_minutes:0)
+    redirect_to tab_beer_show_path(user_id:@user.id,stop:'false')
   end
 
   def tab_beer_show
-    render :tab_beer_show
+    set_user
+    set_stop
+
   end
 
   def login_enter
     @user =  User.find_by_name(params[:users][:name])
     if @user and @user&.authenticate(params[:users][:password])
       @stop = false
-      render :tab_beer_show
+      redirect_to tab_beer_show_path(user_id:@user.id,stop:'false')
     else
       render :register
     end
@@ -64,5 +70,9 @@ class UsersController < ApplicationController
     minutes = @user.tab.total_minutes + ((@user.tab.finish_date - @user.tab.start_date) / 1.minutes)
     cost = minutes * 2 #beer prize 2 euros per minute
     @user.tab.update(total_minutes: minutes,total_euros: cost )
+  end
+
+  def set_stop
+    @stop = params[:stop]
   end
 end
