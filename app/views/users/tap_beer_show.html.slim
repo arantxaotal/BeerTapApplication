@@ -5,9 +5,9 @@ html class="text-center pt-1 mb-5 pb-1"
     .div  class="form-outline mb-4"
       h1 = 'Beer Tap Counter'
     - if @user.role_cd == User.roles[:client]
-      = render partial: "client_view"
+      = render partial: "users/client_view"
     - elsif @user.role_cd == User.roles[:dispenser]
-      = render partial: "admin_view"
+      = render partial: "users/admin_view"
 
 
 

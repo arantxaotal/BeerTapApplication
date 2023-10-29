@@ -7,20 +7,31 @@ div class="form-outline mb-4"
       th = "Beer type"
       th = "Flow volume (litre/second)"
       th = "Prize/litre"
-      th = "Actions"
+
    tbody
      - BeerType.all.try(:each) do |beer_type|
        tr
         td = beer_type.try(:name)
         td = beer_type.try(:flow_volume)
         td = beer_type.try(:prize_per_litre)
-        td
-          = link_to nil, title: 'Edit Beer Type' do
-            i.fa.fa-pencil.btn
-          = link_to nil, title: 'Delete Beer Type' do
-            i.fa.fa-trash.btn
-div class="form-outline mb-4"
-  = link_to 'Create Beer Type', nil, class: 'btn btn-primary'
+
+div = form_for :beer_types, url: new_beer_type_path, method:'GET', html: { multipart: true }, authenticity_token: true, remote: true do |f|
+   div  class="form-outline mb-4"
+     - title = 'Name'
+     = f.text_field :name,  placeholder: title, title: title, required: true
+
+   div  class="form-outline mb-4"
+     - title = 'Flow Volume'
+     = f.number_field :flow_volume, placeholder: title, title: title, required: true, step:0.01
+
+   div class="form-outline mb-4"
+     - title = 'Prize'
+     = f.number_field :prize_per_litre, placeholder: title, title: title, required: true, step:0.01
+
+   div  class="form-outline mb-4"
+     = f.submit 'Create Beer type tap', class: 'btn btn-primary'
+   div
+     = f.hidden_field :user_id, value: @user.id
 
 h3= "Client list"
 
@@ -33,7 +44,7 @@ div class="form-outline mb-4"
         th = "Seconds"
         th = "Euros"
         th = "Beer type"
-        th = "Actions"
+
     tbody
       - User.where(role_cd: 0).all.try(:each) do |user|
         - if user.try(:tap)
@@ -42,10 +53,3 @@ div class="form-outline mb-4"
             td = user.tap.try(:total_seconds)
             td = user.tap.try(:total_euros)
             td = user.tap.beer_type_name
-            td
-              = link_to editable_user_path(user_id:user.id), title: 'Edit User' , remote:true do
-                    i.fa.fa-pencil.btn
-              = link_to user_path(id:user.id), title: 'Delete User', data: {confirm: 'Are you sure?'}, method: :delete, remote:true do
-                i.fa.fa-trash.btn
-div class="form-outline mb-4"
-  = link_to 'Create User', login_users_path, class: 'btn btn-primary'
