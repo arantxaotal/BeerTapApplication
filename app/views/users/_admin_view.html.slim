@@ -1,7 +1,25 @@
-h3= 'Beer type tap'
-div class="form-outline mb-4"
+h3= 'Beer types'
+div = form_for :beer_types, url: new_beer_type_path, method:'GET', html: { multipart: true }, authenticity_token: true, remote: true do |f|
+  div  class="form-outline mb-4"
+    - title = 'Name'
+    = f.text_field :name,  placeholder: title, title: title, required: true
 
-  table class="table table-striped table-bordered" style="margin: auto;width: 50% !important; "
+  div  class="form-outline mb-4"
+    - title = 'Flow Volume'
+    = f.number_field :flow_volume, placeholder: title, title: title, required: true, step:0.01
+
+  div class="form-outline mb-4"
+    - title = 'Prize'
+    = f.number_field :prize_per_litre, placeholder: title, title: title, required: true, step:0.01
+
+  div  class="form-outline mb-4"
+    = f.submit 'Create Beer type tap', class: 'btn btn-primary'
+  div
+    = f.hidden_field :user_id, value: @user.id
+
+div class="form-outline mb-4" style="overflow: auto; height: 300px;"
+
+  table class="table table-striped table-bordered"
    thead
     tr
       th = "Beer type"
@@ -15,29 +33,12 @@ div class="form-outline mb-4"
         td = beer_type.try(:flow_volume)
         td = beer_type.try(:prize_per_litre)
 
-div = form_for :beer_types, url: new_beer_type_path, method:'GET', html: { multipart: true }, authenticity_token: true, remote: true do |f|
-   div  class="form-outline mb-4"
-     - title = 'Name'
-     = f.text_field :name,  placeholder: title, title: title, required: true
 
-   div  class="form-outline mb-4"
-     - title = 'Flow Volume'
-     = f.number_field :flow_volume, placeholder: title, title: title, required: true, step:0.01
+h3= "Clients list"
 
-   div class="form-outline mb-4"
-     - title = 'Prize'
-     = f.number_field :prize_per_litre, placeholder: title, title: title, required: true, step:0.01
+div  style="overflow: auto; height: 300px;"
 
-   div  class="form-outline mb-4"
-     = f.submit 'Create Beer type tap', class: 'btn btn-primary'
-   div
-     = f.hidden_field :user_id, value: @user.id
-
-h3= "Client list"
-
-div class="form-outline mb-4"
-
-  table class="table table-striped table-bordered" style="margin: auto;width: 50% !important; "
+  table class="table table-striped table-bordered"
     thead
       tr
         th = "Username"
