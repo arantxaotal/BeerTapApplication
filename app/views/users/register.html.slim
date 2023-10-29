@@ -22,7 +22,7 @@ html class="text-center pt-1 mb-5 pb-1"
               = f.password_field :password_confirmation, placeholder: title, title: title, required: true
 
             .div class="mx-auto mb-4"  style="width:258px;"
-              - title = 'Select tab'
+              - title = 'Select tap'
               = f.select :beer_type_id, options_from_collection_for_select(BeerType.all, :id, :name, nil), {include_blank: false},
                       {data: {placeholder: title}, class: 'form-select', title: title}
 

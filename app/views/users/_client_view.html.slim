@@ -3,9 +3,9 @@ row
     div
       .div  class="form-outline mb-4"
         p
-          h2 = 'Tab information for user '+ @user.name
-          h5 = 'Total seconds: '+ (!@user.tab.try(:total_seconds).nil? ? @user.tab.try(:total_seconds).round(2).to_s : '0')
-          h5 = 'Total euros: '+ (!@user.tab.try(:total_euros).nil? ? @user.tab.try(:total_euros).round(2).to_s : '0')+' €'
+          h2 = 'Tap information for user '+ @user.name
+          h5 = 'Total seconds: '+ (!@user.tap.try(:total_seconds).nil? ? @user.tap.try(:total_seconds).round(2).to_s : '0')
+          h5 = 'Total euros: '+ (!@user.tap.try(:total_euros).nil? ? @user.tap.try(:total_euros).round(2).to_s : '0')+' €'
       - if @stop == 'false'
         .div  class="form-outline mb-4"
           = link_to 'Start', save_start_date_path(user_id:@user.id), class:"btn btn-success"

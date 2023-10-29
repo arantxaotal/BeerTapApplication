@@ -1,3 +1,3 @@
 class BeerType < ApplicationRecord
-  has_many :tab
+  has_many :tap
 end

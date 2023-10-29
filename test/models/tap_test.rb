@@ -1,6 +1,6 @@
 require "test_helper"
 
-class TabsControllerTest < ActionDispatch::IntegrationTest
+class TapTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

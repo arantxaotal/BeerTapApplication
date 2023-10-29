@@ -1,0 +1,2 @@
+class TapsController < ApplicationController
+end

@@ -1,6 +1,6 @@
-class CreateTabs < ActiveRecord::Migration[6.1]
+class CreateTaps < ActiveRecord::Migration[6.1]
   def change
-    create_table :tabs do |t|
+    create_table :taps do |t|
       t.float "total_seconds", default: 0
       t.datetime "start_date"
       t.datetime "finish_date"
